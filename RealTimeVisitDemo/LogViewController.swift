@@ -93,6 +93,8 @@ extension LogViewController: UITableViewDelegate,UITableViewDataSource{
         let dic:Dictionary<String,Any> = dataCount[indexPath.row]
         cell?.secondLabel.text = (dic["response"] as! Dictionary<String,Any>).description
         cell?.firstLabel?.text = (dic["timeStamp"] as! String)
+        
+        cell?.selectionStyle = .none
         return cell!
     }
     
