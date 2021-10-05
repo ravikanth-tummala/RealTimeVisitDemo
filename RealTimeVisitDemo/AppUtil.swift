@@ -23,7 +23,7 @@ class AppUtil {
         var properties:Dictionary<String,Any> = ["marker-size":"medium","marker-symbol":"circle","LocationManager":source.rawValue]
         var marker_color:String?
         properties["marker-color"] = marker_color
-        properties["recorded_at"] = loc.timestamp
+        properties["recorded_at"] = "\(loc.timestamp)"
         
         if source.hashValue == 0 {
             marker_color = "#ff0000"

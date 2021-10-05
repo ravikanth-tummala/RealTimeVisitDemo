@@ -14,10 +14,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         UserLocationManger.shared
+        //        UserDefaults.standard.set(clvisitSwitch.isOn, forKey: clvisit)
+        // UserDefaults.standard.set(pauseLocationSwitch.isOn, forKey: pauseLocation)
 
         if UserDefaults.standard.bool(forKey: starTracking){
-        
+            let pause = UserDefaults.standard.bool(forKey: pauseLocation)
+            let visit = UserDefaults.standard.bool(forKey: clvisit)
+            UserLocationManger.shared.startUpdateLocationManager(pause, visit)
         }
+     
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
             if let error = error {
                 print("D'oh: \(error.localizedDescription)")

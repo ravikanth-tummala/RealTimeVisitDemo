@@ -25,9 +25,12 @@ class UserLocationManger : NSObject, CLLocationManagerDelegate{
     func startUpdateLocationManager(_ pauseLocation:Bool,_ clVisit:Bool){
     
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        self.locationManager.distanceFilter = kCLLocationAccuracyHundredMeters
-        locationManager.allowsBackgroundLocationUpdates = true
-
+        self.locationManager.distanceFilter = 50
+        self.locationManager.allowsBackgroundLocationUpdates = true
+        self.locationManager.allowsBackgroundLocationUpdates = true
+        self.locationManager.showsBackgroundLocationIndicator = true
+        self.locationManager.activityType = .fitness
+        
         if pauseLocation{
             locationManager.pausesLocationUpdatesAutomatically = true
         }
@@ -52,30 +55,37 @@ class UserLocationManger : NSObject, CLLocationManagerDelegate{
         }
 
         print(location.description)
+        LoggerManager.sharedInstance.showNotification(locationType.didUpdateLocation.rawValue, location.description)
         LoggerManager.sharedInstance.writeLocationToFile(AppUtil().feature(.didUpdateLocation, location))
     }
     
     func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {
-        print("locationManager didVisit")
         
+        print("locationManager didVisit")
         guard let location = manager.location else {
             return
         }
+        LoggerManager.sharedInstance.showNotification(locationType.didVisit.rawValue, location.description)
         LoggerManager.sharedInstance.writeLocationToFile(AppUtil().feature(.didVisit, location))
 
     }
     
     func locationManagerDidPauseLocationUpdates(_ manager: CLLocationManager) {
+        print("locationManager DidPauseLocationUpdates")
+
         guard let location = manager.location else {
             return
         }
+        LoggerManager.sharedInstance.showNotification(locationType.pauseLocation.rawValue, location.description)
         LoggerManager.sharedInstance.writeLocationToFile(AppUtil().feature(.pauseLocation, location))
     }
     
     func locationManagerDidResumeLocationUpdates(_ manager: CLLocationManager) {
+        print("locationManager DidResumeLocationUpdates")
         guard let location = manager.location else {
             return
         }
+        LoggerManager.sharedInstance.showNotification(locationType.resumeLocation.rawValue, location.description)
         LoggerManager.sharedInstance.writeLocationToFile(AppUtil().feature(.resumeLocation, location))
     }
 }

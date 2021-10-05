@@ -24,19 +24,19 @@ class LogViewController: UIViewController{
         
 
         serverLogs()
-//        addExportButtonOnRight()
         
     }
     
     @IBAction func ExportBtn(_ sender: Any) {
         
         var dataArray: [Dictionary<String,Any>] = []
-        dataArray = UserDefaults.standard.array(forKey: "savelocationServerLogs") as? [Dictionary<String,Any>] ?? []
+        dataArray = UserDefaults.standard.array(forKey: "savelocationServerLogExport") as? [Dictionary<String,Any>] ?? []
         
         guard dataArray != nil else {
             return
         }
         let dict:Dictionary<String,Any> = ["type":"FeatureCollection","features":dataArray]
+        print(dataArray)
         saveToJsonFile(dict)
         self.getJsonFile()
     }
@@ -48,14 +48,13 @@ class LogViewController: UIViewController{
         let fileUrl = documentDirectoryUrl.appendingPathComponent("location.json")
         // Transform array into data and save it into file
         do {
-            let data = try! JSONEncoder().encode(<#T##value: Encodable##Encodable#>)
-
-                //try! JSONSerialization.data(withJSONObject: dict, options: [])
+            let data = try! JSONSerialization.data(withJSONObject: dict, options: [])
             try data.write(to: fileUrl, options: [])
         } catch {
             print(error)
         }
     }
+    
     func getJsonFile(){
         
         guard let documentDirectoryUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }

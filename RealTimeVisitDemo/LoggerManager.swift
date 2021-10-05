@@ -21,8 +21,8 @@ internal class LoggerManager: NSObject {
     
     func writeLocationToFile(_ dict:Dictionary<String,Any>) {
         if dict.isEmpty == false {
-            LoggerManager.showNotification(dict.description)
             LoggerManager.savelocationServerLogs(dict)
+            LoggerManager.savelocationExport(dict)
             let stringValue =  LoggerManager.getCurrentTimeStamp() + "        " + dict.description + "\n"
             let data = stringValue.data(using: String.Encoding.utf8, allowLossyConversion: false)!
             if FileManager.default.fileExists(atPath: LoggerManager.fileUrl.path) {
@@ -49,6 +49,19 @@ internal class LoggerManager: NSObject {
         UserDefaults.standard.synchronize()
     }
     
+    
+    static func savelocationExport(_ dict:Dictionary<String,Any>){
+        var dataArray = UserDefaults.standard.array(forKey: "savelocationServerLogExport")
+            if let _ = dataArray {
+                dataArray?.append(dict)
+            }else{
+                dataArray = [dict]
+            }
+        UserDefaults.standard.set(dataArray, forKey: "savelocationServerLogExport")
+        UserDefaults.standard.synchronize()
+    }
+    
+    
     static func getCurrentTimeStamp()->String{
         let currentDateTime = Date()
         let formatter = DateFormatter()
@@ -57,12 +70,13 @@ internal class LoggerManager: NSObject {
     }
     
     
-    static func showNotification(_ location:String ){
+    func showNotification(_ title:String, _ body:String ){
         
         let content = UNMutableNotificationContent()
-        content.title = location.description
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-        let request = UNNotificationRequest(identifier: "notification.id.01 \(location)", content: content, trigger: trigger)
+        content.title = title
+        content.body = body
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 2, repeats: false)
+        let request = UNNotificationRequest(identifier: "notification.id.01 \(body)", content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
 }
