@@ -33,7 +33,7 @@ class UserLocationManger : NSObject, CLLocationManagerDelegate{
         self.locationManager.activityType = .fitness
         self.locationManager.startMonitoringVisits()
         self.locationManager.startMonitoringSignificantLocationChanges()
-        locationManager.startUpdatingLocation()
+        self.locationManager.startUpdatingLocation()
     }
     func stopUpdateLocationManager(){
         locationManager.stopMonitoringSignificantLocationChanges()

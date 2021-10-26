@@ -23,22 +23,16 @@ class AppUtil {
         
         var mainDict:Dictionary<String,Any> = ["type":"Feature"]
         var properties:Dictionary<String,Any> = ["marker-size":"medium","marker-symbol":"circle","LocationManager":source.rawValue]
-        var marker_color:String?
-        properties["marker-color"] = marker_color
-        properties["AppState"] = UserDefaults.standard.string(forKey:"AppState")
-        properties["recorded_at"] = "\(loc.timestamp)"
+        let appState = UserDefaults.standard.string(forKey:"AppState")
         
-        if source.hashValue == 0 {
-            marker_color = "#ff0000"
-        } else if source.hashValue == 1{
-            marker_color = "#0032ff"
-        } else if source.hashValue == 2{
-            marker_color = "#038c44"
-        }else {
-            marker_color = "##e47509f0"
+        if appState == "T"{
+            properties["marker-color"] = "#e8290c"
+        }else{
+            properties["marker-color"] = "#1b05e6"
         }
-        
-        
+        properties["AppState"] = appState
+        properties["recorded_at"] = "\(loc.timestamp)"
+ 
         let geometry:Dictionary<String,Any> = ["type":"Point","coordinates":[loc.coordinate.longitude,loc.coordinate.latitude]]
         mainDict["properties"] = properties
         mainDict["geometry"] = geometry
