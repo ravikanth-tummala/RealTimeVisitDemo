@@ -25,7 +25,7 @@
 		5357B6C52705C8CA0067FB0B /* LogTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogTableViewCell.swift; sourceTree = "<group>"; };
 		5357B6C62705C8CA0067FB0B /* LogTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogTableViewCell.xib; sourceTree = "<group>"; };
 		53C7B15C270AC2ED0059B1A8 /* AppUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtil.swift; sourceTree = "<group>"; };
-		53D840C12705A0180086FCF3 /* RealTimeVisitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealTimeVisitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		53D840C12705A0180086FCF3 /* CustomPocDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomPocDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53D840C42705A0180086FCF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53D840C62705A0180086FCF3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		53D840C82705A0180086FCF3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -69,7 +69,7 @@
 		53D840C22705A0180086FCF3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				53D840C12705A0180086FCF3 /* RealTimeVisitDemo.app */,
+				53D840C12705A0180086FCF3 /* CustomPocDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -110,7 +110,7 @@
 			);
 			name = RealTimeVisitDemo;
 			productName = RealTimeVisitDemo;
-			productReference = 53D840C12705A0180086FCF3 /* RealTimeVisitDemo.app */;
+			productReference = 53D840C12705A0180086FCF3 /* CustomPocDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -327,8 +327,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.geospark.ignite.RealTimeVisitDemo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.geospark.customTracking;
+				PRODUCT_NAME = CustomPocDemo;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -348,8 +348,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.geospark.ignite.RealTimeVisitDemo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.geospark.customTracking;
+				PRODUCT_NAME = CustomPocDemo;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

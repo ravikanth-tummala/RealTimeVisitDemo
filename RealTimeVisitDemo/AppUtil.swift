@@ -13,6 +13,8 @@ enum locationType:String {
     case didVisit
     case pauseLocation
     case resumeLocation
+    case didExit
+
 }
 class AppUtil {
     
@@ -23,6 +25,7 @@ class AppUtil {
         var properties:Dictionary<String,Any> = ["marker-size":"medium","marker-symbol":"circle","LocationManager":source.rawValue]
         var marker_color:String?
         properties["marker-color"] = marker_color
+        properties["AppState"] = UserDefaults.standard.string(forKey:"AppState")
         properties["recorded_at"] = "\(loc.timestamp)"
         
         if source.hashValue == 0 {
@@ -36,11 +39,12 @@ class AppUtil {
         }
         
         
-        let geometry:Dictionary<String,Any> = ["type":"Point","coordinates":[loc.coordinate.latitude,loc.coordinate.longitude]]
+        let geometry:Dictionary<String,Any> = ["type":"Point","coordinates":[loc.coordinate.longitude,loc.coordinate.latitude]]
         mainDict["properties"] = properties
         mainDict["geometry"] = geometry
         
         return mainDict
     }
+    
     
 }

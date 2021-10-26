@@ -22,25 +22,22 @@ class UserLocationManger : NSObject, CLLocationManagerDelegate{
         locationManager.requestAlwaysAuthorization()
     }
     
-    func startUpdateLocationManager(_ pauseLocation:Bool,_ clVisit:Bool){
+    func startUpdateLocationManager(_ pauseLocation:Bool = false,_ clVisit:Bool = false){
     
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         self.locationManager.distanceFilter = 10
         self.locationManager.allowsBackgroundLocationUpdates = true
-        self.locationManager.allowsBackgroundLocationUpdates = true
         self.locationManager.showsBackgroundLocationIndicator = true
+        self.locationManager.pausesLocationUpdatesAutomatically = false
         self.locationManager.activityType = .fitness
-        
-        if pauseLocation{
-            locationManager.pausesLocationUpdatesAutomatically = true
-        }
-        if clVisit{
-            locationManager.startMonitoringVisits()
-        }
+        self.locationManager.startMonitoringVisits()
+        self.locationManager.startMonitoringSignificantLocationChanges()
         locationManager.startUpdatingLocation()
     }
     func stopUpdateLocationManager(){
-        locationManager.startMonitoringVisits()
+        locationManager.stopMonitoringSignificantLocationChanges()
+        locationManager.stopMonitoringVisits()
         locationManager.stopUpdatingLocation()
     }
     
@@ -54,9 +51,10 @@ class UserLocationManger : NSObject, CLLocationManagerDelegate{
             return
         }
 
+        self.createGeofence(location.coordinate)
         print("didUpdateLocations",location.description)
-//        LoggerManager.sharedInstance.showNotification(locationType.didUpdateLocation.rawValue, location.description)
-//        LoggerManager.sharedInstance.writeLocationToFile(AppUtil().feature(.didUpdateLocation, location))
+        LoggerManager.sharedInstance.showNotification(locationType.didUpdateLocation.rawValue, location.description)
+        LoggerManager.sharedInstance.writeLocationToFile(AppUtil().feature(.didUpdateLocation, location))
     }
     
     func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {
@@ -66,6 +64,7 @@ class UserLocationManger : NSObject, CLLocationManagerDelegate{
             LoggerManager.sharedInstance.showNotification(locationType.didVisit.rawValue, "no location recorded")
             return
         }
+        self.createGeofence(location.coordinate)
         LoggerManager.sharedInstance.showNotification(locationType.didVisit.rawValue, location.description)
         LoggerManager.sharedInstance.writeLocationToFile(AppUtil().feature(.didVisit, location))
 
@@ -79,6 +78,7 @@ class UserLocationManger : NSObject, CLLocationManagerDelegate{
 
             return
         }
+        self.createGeofence(location.coordinate)
         LoggerManager.sharedInstance.showNotification(locationType.pauseLocation.rawValue, location.description)
         LoggerManager.sharedInstance.writeLocationToFile(AppUtil().feature(.pauseLocation, location))
     }
@@ -89,7 +89,30 @@ class UserLocationManger : NSObject, CLLocationManagerDelegate{
             LoggerManager.sharedInstance.showNotification(locationType.resumeLocation.rawValue, "no location recorded")
             return
         }
+        self.createGeofence(location.coordinate)
         LoggerManager.sharedInstance.showNotification(locationType.resumeLocation.rawValue, location.description)
         LoggerManager.sharedInstance.writeLocationToFile(AppUtil().feature(.resumeLocation, location))
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        guard let location = manager.location else {
+            LoggerManager.sharedInstance.showNotification(locationType.didExit.rawValue, "no location recorded")
+            return
+        }
+        self.createGeofence(location.coordinate)
+        LoggerManager.sharedInstance.showNotification(locationType.didExit.rawValue, location.description)
+        LoggerManager.sharedInstance.writeLocationToFile(AppUtil().feature(.resumeLocation, location))
+
+    }
+    private func createGeofence(_ locationCoordinate:CLLocationCoordinate2D){
+        let region = CLCircularRegion(center: locationCoordinate, radius: 100, identifier: "locationCoordinate")
+        region.notifyOnExit = true
+        locationManager.startMonitoring(for: region)
+    }
+    
+    private func clearGeofence(){
+        locationManager.monitoredRegions.forEach { region in
+            locationManager.stopMonitoring(for: region)
+        }
     }
 }
