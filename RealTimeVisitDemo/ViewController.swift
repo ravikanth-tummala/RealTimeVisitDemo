@@ -42,9 +42,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func startTracking(_ sender: Any) {
-//        UserDefaults.standard.set(clvisitSwitch.isOn, forKey: clvisit)
-//        UserDefaults.standard.set(pauseLocationSwitch.isOn, forKey: pauseLocation)
-//        UserDefaults.standard.set(true, forKey: starTracking)
+        UserDefaults.standard.set(true, forKey: starTracking)
         self.startTrackingBtn.isHidden = true
         self.stopTrackingBtn.isHidden = false
 

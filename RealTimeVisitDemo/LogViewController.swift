@@ -12,6 +12,7 @@ class LogViewController: UIViewController{
     var dataCount:[Dictionary<String,Any>] = []
     
     @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,6 +40,10 @@ class LogViewController: UIViewController{
         print(dataArray)
         saveToJsonFile(dict)
         self.getJsonFile()
+    }
+    
+    @IBAction func refreshBtn(_ sender: Any) {
+        serverLogs()
     }
     
     
@@ -71,6 +76,7 @@ class LogViewController: UIViewController{
             dataCount = dataArray as! [Dictionary<String,Any>]
             DispatchQueue.main.async {
                 self.dataCount = self.dataCount.reversed()
+                self.tableView.reloadData()
             }
         }
     }

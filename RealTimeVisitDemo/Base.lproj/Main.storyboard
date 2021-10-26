@@ -12,7 +12,7 @@
         <!--Logger-->
         <scene sceneID="bSY-fu-zDU">
             <objects>
-                <viewController id="vy1-VD-7Ly" customClass="LogViewController" customModule="RealTimeVisitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vy1-VD-7Ly" customClass="LogViewController" customModule="CustomPocDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CGQ-71-igi">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -26,10 +26,10 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a6z-EQ-zTs">
-                                <rect key="frame" x="30" y="74" width="354" height="40"/>
+                                <rect key="frame" x="30" y="74" width="224" height="40"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="2om-LW-5vA"/>
+                                    <constraint firstAttribute="height" constant="40" id="PcQ-P1-LZr"/>
                                 </constraints>
                                 <state key="normal" title="Export Data">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -38,17 +38,36 @@
                                     <action selector="ExportBtn:" destination="vy1-VD-7Ly" eventType="touchUpInside" id="51K-bQ-012"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nVU-jn-vt9">
+                                <rect key="frame" x="294" y="74" width="100" height="40"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="VJj-17-l8l"/>
+                                    <constraint firstAttribute="width" constant="100" id="eTF-Lf-Knq"/>
+                                    <constraint firstAttribute="height" constant="40" id="xmc-v8-BZo"/>
+                                </constraints>
+                                <state key="normal" title="Refresh">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="refreshBtn:" destination="vy1-VD-7Ly" eventType="touchUpInside" id="iFz-UT-cVP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="EjD-ZO-Zo7"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="a6z-EQ-zTs" firstAttribute="top" secondItem="EjD-ZO-Zo7" secondAttribute="top" constant="30" id="7ac-yt-YJk"/>
+                            <constraint firstItem="H10-Nm-x2W" firstAttribute="top" secondItem="nVU-jn-vt9" secondAttribute="bottom" constant="10" id="C5C-kT-6wL"/>
+                            <constraint firstItem="H10-Nm-x2W" firstAttribute="top" secondItem="nVU-jn-vt9" secondAttribute="bottom" constant="10" id="JqE-1a-QqC"/>
+                            <constraint firstItem="a6z-EQ-zTs" firstAttribute="leading" secondItem="EjD-ZO-Zo7" secondAttribute="leading" constant="30" id="Lc1-Cq-tLR"/>
+                            <constraint firstItem="EjD-ZO-Zo7" firstAttribute="trailing" secondItem="nVU-jn-vt9" secondAttribute="trailing" constant="20" id="PFg-GQ-CXC"/>
                             <constraint firstItem="H10-Nm-x2W" firstAttribute="leading" secondItem="EjD-ZO-Zo7" secondAttribute="leading" id="UE9-xF-M26"/>
-                            <constraint firstItem="H10-Nm-x2W" firstAttribute="top" secondItem="a6z-EQ-zTs" secondAttribute="bottom" constant="10" id="YeL-Db-i7w"/>
+                            <constraint firstItem="nVU-jn-vt9" firstAttribute="leading" secondItem="a6z-EQ-zTs" secondAttribute="trailing" constant="40" id="Wac-gO-kn6"/>
+                            <constraint firstItem="EjD-ZO-Zo7" firstAttribute="trailing" secondItem="nVU-jn-vt9" secondAttribute="trailing" constant="20" id="fBp-AV-ybC"/>
                             <constraint firstItem="EjD-ZO-Zo7" firstAttribute="trailing" secondItem="H10-Nm-x2W" secondAttribute="trailing" id="fq7-zv-I2o"/>
+                            <constraint firstItem="a6z-EQ-zTs" firstAttribute="top" secondItem="EjD-ZO-Zo7" secondAttribute="top" constant="30" id="m7Z-Uq-92X"/>
                             <constraint firstItem="EjD-ZO-Zo7" firstAttribute="bottom" secondItem="H10-Nm-x2W" secondAttribute="bottom" id="mI8-1M-Skv"/>
-                            <constraint firstItem="a6z-EQ-zTs" firstAttribute="leading" secondItem="EjD-ZO-Zo7" secondAttribute="leading" constant="30" id="oIU-Oe-PMP"/>
-                            <constraint firstItem="EjD-ZO-Zo7" firstAttribute="trailing" secondItem="a6z-EQ-zTs" secondAttribute="trailing" constant="30" id="veM-tb-cGM"/>
+                            <constraint firstItem="nVU-jn-vt9" firstAttribute="top" secondItem="EjD-ZO-Zo7" secondAttribute="top" constant="30" id="n46-UD-yqA"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Logger" image="square.and.arrow.up" catalog="system" id="LE8-4z-9hJ"/>
@@ -63,7 +82,7 @@
         <!--Contacts-->
         <scene sceneID="8nr-QO-CuT">
             <objects>
-                <viewController id="Ujr-0A-R8S" customClass="ViewController" customModule="RealTimeVisitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Ujr-0A-R8S" customClass="ViewController" customModule="CustomPocDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uNt-yD-3ci">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
