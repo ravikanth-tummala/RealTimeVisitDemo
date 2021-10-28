@@ -42,6 +42,13 @@ class LogViewController: UIViewController{
     }
     
     
+    @IBAction func clearBtn(_ sender: Any) {
+        UserDefaults.standard.string(forKey: "savelocationServerLogs")
+        UserDefaults.standard.string(forKey: "savelocationServerLogExport")
+        UserDefaults.standard.synchronize()
+        self.serverLogs()
+    }
+    
     func saveToJsonFile(_ dict:Dictionary<String,Any>) {
         // Get the url of Persons.json in document directory
         guard let documentDirectoryUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
