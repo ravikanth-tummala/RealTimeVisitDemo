@@ -20,6 +20,7 @@ internal class LoggerManager: NSObject {
     }()
     
     func writeLocationToFile(_ dict:Dictionary<String,Any>) {
+        print("writeLocationToFile \(dict)")
         if dict.isEmpty == false {
             LoggerManager.savelocationServerLogs(dict)
             LoggerManager.savelocationExport(dict)
@@ -71,7 +72,7 @@ internal class LoggerManager: NSObject {
     
     
     func showNotification(_ title:String, _ body:String ){
-        
+    
         let content = UNMutableNotificationContent()
         content.title = title
         content.body = body

@@ -24,6 +24,7 @@ class UserLocationManger : NSObject, CLLocationManagerDelegate{
     
     func startUpdateLocationManager(_ pauseLocation:Bool,_ clVisit:Bool){
     
+        self.locationManager.requestAlwaysAuthorization()
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.distanceFilter = 10
         self.locationManager.allowsBackgroundLocationUpdates = true
@@ -56,7 +57,7 @@ class UserLocationManger : NSObject, CLLocationManagerDelegate{
 
         print("didUpdateLocations",location.description)
 //        LoggerManager.sharedInstance.showNotification(locationType.didUpdateLocation.rawValue, location.description)
-//        LoggerManager.sharedInstance.writeLocationToFile(AppUtil().feature(.didUpdateLocation, location))
+        LoggerManager.sharedInstance.writeLocationToFile(AppUtil().feature(.didUpdateLocation, location))
     }
     
     func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {

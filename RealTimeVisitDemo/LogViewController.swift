@@ -41,12 +41,20 @@ class LogViewController: UIViewController{
         self.getJsonFile()
     }
     
-    
+    @IBAction func refreshBtn(_ sender: Any) {
+        serverLogs()
+    }
+
     @IBAction func clearBtn(_ sender: Any) {
         UserDefaults.standard.string(forKey: "savelocationServerLogs")
         UserDefaults.standard.string(forKey: "savelocationServerLogExport")
         UserDefaults.standard.synchronize()
-        self.serverLogs()
+        
+        DispatchQueue.main.async {
+            self.dataCount.removeAll()
+            self.tableView.reloadData()
+        }
+
     }
     
     func saveToJsonFile(_ dict:Dictionary<String,Any>) {
@@ -78,6 +86,7 @@ class LogViewController: UIViewController{
             dataCount = dataArray as! [Dictionary<String,Any>]
             DispatchQueue.main.async {
                 self.dataCount = self.dataCount.reversed()
+                self.tableView.reloadData()
             }
         }
     }
